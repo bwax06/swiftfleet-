@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Swift Fleet Courier</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #fff;
+      color: #000;
+    }
+    header {
+      background: #000;
+      color: #fff;
+      padding: 1em 0;
+    }
+    header h1 {
+      margin: 0;
+      padding-left: 20px;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 1em;
+      padding: 0;
+      margin: 0;
+    }
+    nav ul li a {
+      color: red;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .hero {
+      background: #900;
+      color: white;
+      padding: 2em 0;
+      text-align: center;
+    }
+    .hero img {
+      max-width: 150px;
+      display: block;
+      margin: 0 auto 1em auto;
+    }
+    .section {
+      padding: 2em 0;
+    }
+    .container {
+      width: 90%;
+      max-width: 1000px;
+      margin: auto;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+    }
+    input, textarea {
+      padding: 0.5em;
+      font-size: 1em;
+    }
+    button {
+      background: #000;
+      color: red;
+      padding: 0.7em;
+      font-size: 1em;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background: red;
+      color: white;
+    }
+    footer {
+      background: #000;
+      color: #fff;
+      text-align: center;
+      padding: 1em 0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Swift Fleet Courier</h1>
+      <nav>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#quote">Get a Quote</a></li>
+          <li><a href="#booking">Book Now</a></li>
+          <li><a href="#login">Driver Login</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section id="home" class="hero">
+    <div class="container">
+      <img src="cheetah_van_logo.png" alt="Swift Fleet Logo" />
+      <h2>Fast. Reliable. Professional Courier Services</h2>
+      <p>Based in West Point, GA – Serving the Atlanta Metro Area and Beyond</p>
+    </div>
+  </section>
+
+  <section id="services" class="section">
+    <div class="container">
+      <h2>Our Services</h2>
+      <ul>
+        <li>Same-Day Delivery</li>
+        <li>Medical & Hazmat Certified Transport</li>
+        <li>Package Pickup & Drop-Off</li>
+        <li>Commercial Fleet Logistics</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="quote" class="section">
+    <div class="container">
+      <h2>Get a Quote</h2>
+      <form onsubmit="calculateQuote(event)">
+        <input type="text" name="name" placeholder="Your Name" required />
+        <input type="email" name="email" placeholder="Your Email" required />
+        <input type="text" name="pickup" placeholder="Pickup Address" required />
+        <input type="text" name="delivery" placeholder="Delivery Address" required />
+        <input type="number" name="weight" placeholder="Package Weight (lbs)" required />
+        <button type="submit">Calculate Quote</button>
+      </form>
+      <p id="quoteResult"></p>
+    </div>
+  </section>
+
+  <section id="booking" class="section">
+    <div class="container">
+      <h2>Book a Delivery</h2>
+      <form action="mailto:byron@swiftfleet.com" method="POST" enctype="text/plain">
+        <input type="text" name="name" placeholder="Your Name" required />
+        <input type="email" name="email" placeholder="Your Email" required />
+        <input type="tel" name="phone" placeholder="Phone Number" required />
+        <input type="text" name="pickup" placeholder="Pickup Address" required />
+        <input type="text" name="delivery" placeholder="Delivery Address" required />
+        <input type="datetime-local" name="pickup-time" required />
+        <textarea name="instructions" placeholder="Special Instructions"></textarea>
+        <button type="submit">Submit Booking</button>
+      </form>
+    </div>
+  </section>
+
+  <section id="login" class="section">
+    <div class="container">
+      <h2>Driver Login</h2>
+      <form onsubmit="loginDriver(event)">
+        <input type="text" id="driverUser" placeholder="Username" required />
+        <input type="password" id="driverPass" placeholder="Password" required />
+        <button type="submit">Login</button>
+        <p id="loginStatus"></p>
+      </form>
+    </div>
+  </section>
+
+  <section id="contact" class="section">
+    <div class="container">
+      <h2>Contact Us</h2>
+      <p>Email: <a href="mailto:byron@swiftfleet.com">byron@swiftfleet.com</a></p>
+      <p>Phone: 678-953-5640</p>
+      <p>Address: 1102 Avenue K, West Point, GA 31833</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Swift Fleet Courier. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    function calculateQuote(event) {
+      event.preventDefault();
+      const weight = event.target.weight.value;
+      const ratePerLb = 1.5;
+      const total = (weight * ratePerLb).toFixed(2);
+      document.getElementById('quoteResult').innerText = `Estimated Price: $${total}`;
+    }
+
+    function loginDriver(event) {
+      event.preventDefault();
+      const user = document.getElementById('driverUser').value;
+      const pass = document.getElementById('driverPass').value;
+      if (user === "driver" && pass === "swift123") {
+        document.getElementById('loginStatus').innerText = "Login successful. Welcome!";
+      } else {
+        document.getElementById('loginStatus').innerText = "Invalid credentials.";
+      }
+    }
+  </script>
+</body>
+</html>
